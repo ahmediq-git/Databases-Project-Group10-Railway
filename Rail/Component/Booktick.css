@@ -1,0 +1,64 @@
+.Cards{
+    display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 0px;
+  padding: 1.5%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color:black;
+  
+}
+.Heading{
+    background-color:rgb(242, 133, 0);
+    color:white;
+    width: 15rem;
+    height: 2rem;
+    margin-left: 0%;
+    margin-top: 5%;
+    position:absolute;
+}
+.card{
+    margin-left:  5%;
+    margin-top:10%;
+    width: 15rem !important;
+    background-color: lightgray;
+    border-radius:5%;
+    border: 5px rgb(242, 133, 0) solid !important;
+
+}
+.im{
+    width: 500px ;
+    height: 150px;
+    margin-left:15px;
+    margin-top:3%;
+    position: relative;
+    background-color:black;
+    border-radius:5%;
+}
+.head{
+    background-color: rgb(242, 133, 0);
+    color: white;
+    justify-content:center !important; 
+    position:relative;
+    border-radius:5%;
+    margin: 5 auto;
+}
+.par{
+    background-color: lightgray;
+    color: purple !;
+    justify-content: end;
+    
+
+}
+.bt{
+    margin-left:50px;
+    color: white !important;
+    background-color:black !important;
+    border-radius: 10%;
+    margin-bottom:2%;
+}
