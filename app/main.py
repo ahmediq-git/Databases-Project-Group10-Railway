@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 # from .database import engine
-from .routers import user, auth, bookings, cargo, jobs
+# from .routers import user, auth, bookings, cargo, jobs
+import routers.user,routers.auth, routers.bookings, routers.cargo,routers.jobs
 # from fastapi.middleware.cors import CORSMiddleware
 
 # No longer created since we are now using alembic
