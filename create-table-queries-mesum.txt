@@ -1,0 +1,97 @@
+CREATE TABLE IF NOT EXISTS public.bookings
+(
+    booking_id integer NOT NULL DEFAULT nextval('bookings_booking_id_seq'::regclass),
+    user_id numeric NOT NULL,
+    seat_id numeric NOT NULL,
+    schedule_id numeric NOT NULL,
+    name character varying COLLATE pg_catalog."default",
+    cnic character varying COLLATE pg_catalog."default",
+    CONSTRAINT bookings_pkey PRIMARY KEY (booking_id)
+)
+
+
+CREATE TABLE IF NOT EXISTS public.capacity
+(
+    schedule_id numeric NOT NULL,
+    seats_left numeric,
+    CONSTRAINT capacity_pkey PRIMARY KEY (schedule_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.cargo
+(
+    cargo_id integer NOT NULL DEFAULT nextval('cargo_cargo_id_seq'::regclass),
+    route_id numeric,
+    train_id numeric,
+    user_id numeric,
+    weight numeric,
+    CONSTRAINT cargo_pkey PRIMARY KEY (cargo_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.drivers
+(
+    driver_id integer NOT NULL DEFAULT nextval('drivers_driver_id_seq'::regclass),
+    name character varying COLLATE pg_catalog."default" NOT NULL,
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    password character varying COLLATE pg_catalog."default" NOT NULL,
+    cnic character varying COLLATE pg_catalog."default",
+    CONSTRAINT drivers_pkey PRIMARY KEY (driver_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.jobs
+(
+    job_id integer NOT NULL DEFAULT nextval('jobs_job_id_seq'::regclass),
+    route_id numeric NOT NULL,
+    status boolean NOT NULL,
+    emp_id numeric,
+    schedule_id numeric,
+    CONSTRAINT jobs_pkey PRIMARY KEY (job_id)
+)
+
+
+CREATE TABLE IF NOT EXISTS public.routes
+(
+    route_id integer NOT NULL DEFAULT nextval('routes_route_id_seq'::regclass),
+    arrival_station_id numeric NOT NULL,
+    departure_station_id numeric NOT NULL,
+    distance numeric,
+    departure_city character varying COLLATE pg_catalog."default" NOT NULL,
+    arrival_city character varying COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT routes_pkey PRIMARY KEY (route_id)
+)
+
+
+CREATE TABLE IF NOT EXISTS public.schedule
+(
+    schedule_id integer NOT NULL DEFAULT nextval('schedule_schedule_id_seq'::regclass),
+    train_id numeric NOT NULL,
+    route_id numeric NOT NULL,
+    arrival_time timestamp without time zone NOT NULL,
+    departure_time timestamp without time zone NOT NULL,
+    departure_date date NOT NULL,
+    CONSTRAINT "Schedule_pkey" PRIMARY KEY (schedule_id)
+)
+
+
+CREATE TABLE IF NOT EXISTS public.train
+(
+    train_id integer NOT NULL DEFAULT nextval('train_train_id_seq'::regclass),
+    train_name character varying COLLATE pg_catalog."default" NOT NULL,
+    type character varying COLLATE pg_catalog."default" NOT NULL,
+    num_seats numeric NOT NULL,
+    CONSTRAINT train_pkey PRIMARY KEY (train_id)
+)
+
+CREATE TABLE IF NOT EXISTS public.users
+(
+    user_id integer NOT NULL DEFAULT nextval('users_user_id_seq'::regclass),
+    fname character varying COLLATE pg_catalog."default",
+    lname character varying COLLATE pg_catalog."default",
+    email character varying COLLATE pg_catalog."default" NOT NULL,
+    password character varying COLLATE pg_catalog."default",
+    phone_num numeric,
+    date_of_birth date,
+    active_booking boolean,
+    created_at timestamp with time zone DEFAULT now(),
+    cnic character varying(15) COLLATE pg_catalog."default",
+    CONSTRAINT "User_pkey" PRIMARY KEY (email)
+)
