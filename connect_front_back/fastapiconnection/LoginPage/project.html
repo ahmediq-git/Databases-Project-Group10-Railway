@@ -1,0 +1,31 @@
+<html>
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="position">
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        <div class="txt">
+            <input name="username" type="text" required>
+            <span></span>
+            <label>Username</label>
+        </div>
+        <div class="txt">
+            <input name="password" type="password" required>
+            <span></span>
+            <label>Password</label>
+        </div>
+        <div class="signup_link"><a href="/FGH">Forgot Password?</a></div>
+        <input type="submit" value="Login">
+        <div class="signup_link">
+            Do not have an account? <a href="/Registration">Register</a>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}
+

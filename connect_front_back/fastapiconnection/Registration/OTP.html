@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='Registration/FP.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head><title>OTP page</title>
+<body>
+    <p style="background-image: url('train.jpg');"></p> 
+  <div class="container">
+    
+    <div class="title">Confirm your contact Number</div>
+    <div class="content">
+      <form action="/submitotp" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Enter Your OTP</span>
+            <input name="OTP" type="text" placeholder="Enter OTP" required>
+          </div> 
+        </div>
+        <div class="button">
+          <input id="submitOTP" type="submit" value="Confirmation"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

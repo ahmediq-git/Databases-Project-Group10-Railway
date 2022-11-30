@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='Registration/FP.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Forget pass page</title>
+   </head>
+<body>
+    <p style="background-image: url('train.jpg');"></p> 
+  <div class="container">
+    
+    <div class="title">Recover Your Password</div>
+    <div class="content">
+
+      <form action="/submitusername" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Enter your User name</span>
+            <input name="username" id="valid" type="text" placeholder="Enter valid information" required>
+          </div>
+        </div>
+        
+        <div class="button">
+            <input type="submit" id="submitemail" value="Confirmation">
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</body>
+<!-- <script>
+  document.getElementById("submitemail").addEventListener("click", redirect)
+  function redirect(){
+    window.location.href="NP.html";  
+  }
+</script> -->
+</html>
+
+<!-- validation still needs to be fixed and submit button when all fields filled to be done too-->

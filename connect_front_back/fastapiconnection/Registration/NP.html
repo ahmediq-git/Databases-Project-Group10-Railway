@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='Registration/NPC.css') }}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    <p style="background-image: url('train.jpg');"></p> 
+  <div class="container">
+    
+    <div class="title">New Password</div>
+    <div class="content">
+      <form action="/submitnewpass" method="post">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">  Enter Your New Password</span>
+            <input name="newpass" type="password" placeholder="New Password" required>
+          </div>
+          
+          <div class="input-box">
+            <span class="details">Enter your new password again</span>
+            <input name="confirmnewpass" type="password" placeholder="Again Enter" required>
+          </div>
+          
+        <div class="button">
+          <input id="submitpass" type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- <script>
+    document.getElementById("submitpass").addEventListener("click", redirect)
+    function redirect(){
+      window.location.href="OTP.html";  
+    }
+  </script> -->
+
+</body>
+</html>
