@@ -2,6 +2,16 @@ from datetime import datetime
 from typing import Optional
 from pydantic import BaseModel, EmailStr
 
+# * #################################  HOME #################################
+
+class AllSchedule(BaseModel):
+
+    departure_city: str
+    arrival_city: str
+    departure_date: str
+    train_name: str
+    train_type: str 
+
 
 # * #################################  USER #################################
 
@@ -26,6 +36,10 @@ class UserCreate(BaseModel):
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
+
+class UserUpdate(BaseModel):
+    old_password: str
+    new_password: str
 
 
 # * ################################# Bookings #################################
@@ -57,14 +71,18 @@ class BookingCreate(BookingBase):
     arrival_city: str
     class_type: str
     seat_id: int
-    arrival_time: datetime
-    departure_time: datetime
-    departure_city: str
+    # arrival_time: Optional[datetime] = None
+    # departure_time: Optional[datetime] = None
+    departure_date: str
 
 class BookingCreateFriend(BookingCreate):
     cnic: str
     name: str # In case of booking for friend 
 
+class BookingUpdate(BaseModel):
+    name: Optional[str] = None
+    cnic: Optional[str] = None
+    seat_id: Optional[int] = None
 
 
 
@@ -86,13 +104,21 @@ class CargoOut(CargoBase):
 
 
 
-# * ################################# Jobs #################################
+# * ################################# Staff #################################
 
-class Job(BaseModel):
+class JobOut(BaseModel):
+
     job_id: int
-    route_id: int
-    status: bool
-    emp_id: int
+    job_type: str
+    departure_city: str
+    arrival_city: str
+    distance: int
+    departure_time: datetime
+    arrival_time: datetime
+    train_name: str
+    train_type: str
+
+
 
 
 # * ################################# TOKEN #################################
@@ -104,4 +130,48 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     id: Optional[str] = None
+
+
+# * ################################# Admin #################################
+
+class TrainCreate(BaseModel):
+    train_name: str
+    train_type: str
+    num_seats: int
+
+
+
+
+class DriverCreate(BaseModel):
+    name: str
+    email: EmailStr
+    password: str
+    cnic: str
+
+
+class RouteCreate(BaseModel):
+    arrival_station_id: int
+    departure_station_id: int
+    distance: int
+    departure_city: str
+    arrival_city: str
+
+
+class ScheduleCreate(BaseModel):
+    train_id: int
+    route_id: int
+    arrival_time: datetime
+    departure_time: datetime
+    departure_date: str
+
+
+class JobCreate(BaseModel):
+    route_id: int
+    schedule_id: int
+    job_type: str
+
+class DelegateStaff(BaseModel):
+    emp_id: int
+
+
 

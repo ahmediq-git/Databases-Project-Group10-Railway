@@ -1,9 +1,9 @@
-from .. import schemas, utils
+from .. import schemas, utils, oauth2
 from ..database import get_db, db
 from fastapi import HTTPException, status, APIRouter, Depends
-from fastapi.encoders import jsonable_encoder
-from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.security.oauth2 import OAuth2PasswordRequestForm
+import re
+
 
 router = APIRouter(
     prefix="/user",
@@ -25,6 +25,13 @@ def create_user(user: schemas.UserCreate, dbase = Depends(db)):
     user.password = utils.hash(user.password)
     sql_query = """INSERT INTO users(fname, lname, email, password, phone_num, date_of_birth, cnic) VALUES (%s, %s, %s, %s, %s, %s, %s);"""
 
+    # domain = re.search("@[\w.]+", user.email)
+    domain = user.email[user.email.find("@") : ]
+    # domain = user.email[domain_index:]
+
+    if domain == "@staff.com" or domain == "@admin.com":
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Please enter a valid domain name")
+
     dbase.cursor.execute(sql_query, (user.fname, user.lname, user.email, user.password, user.phone_num, user.dob, user.cnic))
     dbase.conn.commit()
     dbase.conn.close()
@@ -32,14 +39,38 @@ def create_user(user: schemas.UserCreate, dbase = Depends(db)):
     # return new_user
     return user
 
-# @router.get("/{id}", response_model=schemas.CustomerOut)
-# def get_user(id: int, db):
-#     # user = db.query(models.User).filter(models.User.id == id).first()
-#     sql_query = ""
-#     db.connect()
-#     user = db.commit(sql_query)
 
-#     if not user:
-#         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User with {id} does not exist")
+@router.put("/update/", response_model=None)
+def update_password(update_info: schemas.UserUpdate, current_user: int = Depends(oauth2.get_current_user)):
+    
+    # Setup database and retreive information
+    conn, cursor = get_db()
+    current_user_email = current_user['email']
+    query = '''
+            SELECT user_id, password FROM users
+            WHERE email = %s
+            '''
+    cursor.execute(query, (current_user_email, ))
+    user = cursor.fetchone()
 
-#     return user    
+    # Hash the old password entered and verify against old password
+    
+    old_password_hashed = utils.hash(update_info.old_password)
+    database_password = current_user['password']
+
+    if not utils.verify(update_info.old_password, database_password):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid Credentials")
+
+
+    # Hash the new password and update table
+    new_password_hashed = utils.hash(update_info.new_password)
+    update_query = '''
+                    UPDATE users
+                    SET password = %s
+                    WHERE email = %s
+                    '''
+    cursor.execute(update_query, (new_password_hashed, current_user_email))
+    conn.commit()
+    conn.close()
+
+    return user    
