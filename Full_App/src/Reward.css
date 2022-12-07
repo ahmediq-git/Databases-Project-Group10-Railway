@@ -1,0 +1,44 @@
+.up{
+  position: relative;
+  margin-block: 200px;
+  background-color: mistyrose;
+  margin-left:20%;
+  margin-right:20%;
+}
+.stamp {
+  position: relative;
+  margin-top:20%;
+  margin-left:30%;
+	width: 500px;
+	height: 414px;
+	background: #fff url(train4.jpg) no-repeat;
+	border: 12px dashed #1b1a19; }
+.he{
+   /* position: absolute;
+  margin-top:200%; */
+  margin-left:8%;
+  position: relative;
+  margin-top: 20%;
+	 color: lightgreen;
+  background-color: goldenrod;
+  text-color: white;
+  margin-right: 5%;
+	
+	font: bold 40px Georgia, "Times New Roman", Times, serif;  
+	/* text-align: center; */
+ }
+ .pe{
+  /* position: absolute;
+ margin-top:200%; */
+ margin-left:8%;
+ margin-right: 5%;
+
+ position: relative;
+ margin-top: 10%;
+  color: purple;
+ background-color: black;
+ text-color: white;
+ 
+ font: bold 40px Georgia;  
+ /* text-align: center; */
+}

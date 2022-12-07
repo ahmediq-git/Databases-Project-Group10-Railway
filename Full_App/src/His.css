@@ -1,0 +1,28 @@
+.bt{
+    justify-content: center;
+    display: inline-block;
+    
+    background-color: pink;
+}
+.bte{
+    background-color: yellow;
+    color:rgb(27, 248, 60);
+
+}
+.all{
+    background-color:black;
+}
+.con{
+    justify-content: center;
+    display: inline-block;
+    background-color:pink;
+    gap:500px;
+    margin-left: 10%;
+    width: 13%;
+    height: 600px;
+    background-color: yellow;
+    color:yellow;
+
+
+
+}
